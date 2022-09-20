@@ -11,3 +11,6 @@ step 4: add the "Force Depth Normals" render feature to the render camera render
 step 5: to use either feature, add a blit render feature and assign the appropriate material
 
 the shaders work perfectly in built-in as well, just use built-in's version of blit which you do through a c# script
+
+
+To use demo project, unpack it then add project from disk in unity hub, first time around it's gonna load for a long time due to removal of library folder to reduce size, don't be alarmed. 
