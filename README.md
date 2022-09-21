@@ -14,3 +14,8 @@ the shaders work perfectly in built-in as well, just use built-in's version of b
 
 
 To use demo project, unpack it then add project from disk in unity hub, first time around it's gonna load for a long time due to removal of library folder to reduce size, don't be alarmed. 
+
+Before:
+![image_013_0000](https://user-images.githubusercontent.com/83895158/191400983-e38cf342-4dfa-4c61-827c-8bc1a09d19a9.png)
+After:
+![image_012_0000](https://user-images.githubusercontent.com/83895158/191401009-9c1fae1b-8946-4df0-83fd-d3d41e43b556.png)
