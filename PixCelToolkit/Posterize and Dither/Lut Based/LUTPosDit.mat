@@ -7,13 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: EdgeDetect
-  m_Shader: {fileID: 4800000, guid: 07c5a3a849394304b9c01bd5e08abb62, type: 3}
+  m_Name: LUTPosDit
+  m_Shader: {fileID: 4800000, guid: cb00c8f855c315642b1f90e99a3810f9, type: 3}
   m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _DEPTHALPHATESTMULTIPLYSWITCH_ON
-  - _DEPTHBLENDMODE_ON
-  - _NORMALALPHATESTMULTIPLYSWITCH_ON
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -23,6 +20,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _3DLUT:
+        m_Texture: {fileID: 11700000, guid: b8d471e6f4f53ad41af6171149f6b9a5, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -40,6 +41,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DitherPattern:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -67,6 +72,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Texture0:
+        m_Texture: {fileID: 11700000, guid: b8d471e6f4f53ad41af6171149f6b9a5, type: 2}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _texcoord:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -90,24 +99,19 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
+    - _ColorDepthPerChannel: 4
     - _Cull: 2
     - _Cutoff: 0.5
-    - _DepthAlphatestMultiplySwitch: 1
-    - _DepthBlendMode: 1
-    - _DepthMult: 0.51
-    - _DepthTreshold: 0.093
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DistanceFalloff: 5.01
+    - _DitherBleed: 0.099
+    - _DitherDistance: 0.325
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _NormalAlphatestMultiplySwitch: 1
-    - _NormalMult: 1.21
-    - _NormalsTreshold: 0.1
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueOffset: 0
@@ -122,13 +126,11 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DepthColor: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _NormalColor: {r: 0, g: 1, b: 1, a: 0}
+    - _MaxDistance: {r: 0.0625, g: 0.0625, b: 0.0625, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Vector12: {r: -173.7, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &333551451407262647
+--- !u!114 &5247035335529199530
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

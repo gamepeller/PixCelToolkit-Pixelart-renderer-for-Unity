@@ -7,13 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: EdgeDetect
-  m_Shader: {fileID: 4800000, guid: 07c5a3a849394304b9c01bd5e08abb62, type: 3}
+  m_Name: PosterizeAndDither
+  m_Shader: {fileID: 4800000, guid: 758c014cc8a63cb46a06c7c72fc5646b, type: 3}
   m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _DEPTHALPHATESTMULTIPLYSWITCH_ON
-  - _DEPTHBLENDMODE_ON
-  - _NORMALALPHATESTMULTIPLYSWITCH_ON
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -92,24 +89,18 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _DepthAlphatestMultiplySwitch: 1
-    - _DepthBlendMode: 1
-    - _DepthMult: 0.51
-    - _DepthTreshold: 0.093
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DistanceFalloff: 5.01
+    - _DitherTreshold: 0.004
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _NormalAlphatestMultiplySwitch: 1
-    - _NormalMult: 1.21
-    - _NormalsTreshold: 0.1
     - _OcclusionStrength: 1
     - _Parallax: 0.005
+    - _PosterizeSteps: 16
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
@@ -122,13 +113,10 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DepthColor: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _NormalColor: {r: 0, g: 1, b: 1, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Vector12: {r: -173.7, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &333551451407262647
+--- !u!114 &6592546071853397033
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
