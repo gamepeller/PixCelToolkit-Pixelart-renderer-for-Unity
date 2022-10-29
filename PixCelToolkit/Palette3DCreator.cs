@@ -4,29 +4,32 @@ using UnityEngine;
 using System.IO;
 using UnityEditor;
 using System.Linq;
+using System;
 
 
 
 [ExecuteInEditMode]
 public class Palette3DCreator : MonoBehaviour
 {
-
+    [Range(1,5)] public int ColorDepthPerChannel = 4;
     public Texture2D PaletteTex;
     public bool PaletteFromTexture = false;
     public Gradient ColorGradient;
     public int NumberOfSamples = 1024;
     public bool PaletteFromGradient = false;
 
-    [Range(1,5)]
-    public int ColorDepthPerChannel = 4;
     public Color[] Palette;
     public bool CreateFromPalette = false;
+
+    public Gradient RRemap;
+    public Gradient GRemap;
+    public Gradient BRemap;
+    public bool CreateFromRemapRGB = false;
     
     [Tooltip("Color Depth Per Channel and Palette are set by LUT \nIf you want to use lut as palette, just put it in PaletteTex instead")]
     public Texture2D LUT;
     [Tooltip("Color Depth Per Channel and Palette are set by LUT \nIf you want to use lut as palette, just put it in PaletteTex instead")]
     public bool CreateFromLUT = false;
-
 
 
 
@@ -63,14 +66,15 @@ public class Palette3DCreator : MonoBehaviour
     
     Color[] ClosestMatchRemapColors(Color[,,] BaseMap, Color[] _palette)
     {
-        Color[,,] RemappedArray = new Color[BaseMap.GetLength(0), BaseMap.GetLength(1), BaseMap.GetLength(2)];
+        int BaseMapLength = BaseMap.GetLength(0);
+        Color[,,] RemappedArray = new Color[BaseMapLength, BaseMapLength, BaseMapLength];
         
         int index = 0;
-        for(int z = 0; z < BaseMap.GetLength(2); z++)
+        for(int z = 0; z < BaseMapLength; z++)
         {
-            for(int y = 0; y < BaseMap.GetLength(1); y++)
+            for(int y = 0; y < BaseMapLength; y++)
             {
-                for(int x = 0; x < BaseMap.GetLength(0); x++)
+                for(int x = 0; x < BaseMapLength; x++)
                 {
                     float OldDiff = 5000f;
                     Color BestMatch = Color.black;
@@ -90,6 +94,30 @@ public class Palette3DCreator : MonoBehaviour
             }
         }
 
+        return Upscale(RemappedArray);
+    }
+
+    Color[] GradientRemapColors(Color[,,] BaseMap, Gradient R, Gradient G, Gradient B)
+    {
+        int BaseMapLength = BaseMap.GetLength(0);
+        Color[,,] RemappedArray = new Color[BaseMapLength, BaseMapLength, BaseMapLength];
+        
+        float stepSize = 1f/(float)BaseMapLength;
+
+        for(int x = 0; x < BaseMapLength; x++)
+        {
+            for(int y = 0; y < BaseMapLength; y++)
+            {
+                for(int z = 0; z < BaseMapLength; z++)
+                {
+                    Color RValue = R.Evaluate(x * stepSize);
+                    Color GValue = G.Evaluate(y * stepSize);
+                    Color BValue = B.Evaluate(z * stepSize);
+                    
+                    RemappedArray[x,y,z] = (RValue/3) + (GValue/3) + (BValue/3);
+                }
+            }
+        }
         return Upscale(RemappedArray);
     }
 
@@ -126,6 +154,7 @@ public class Palette3DCreator : MonoBehaviour
         }
         return output;
     }
+    
     Color[] ExtractColFromTex2D(Texture2D tex)
     {
         Color[] op = tex.GetPixels(0);
@@ -155,6 +184,7 @@ public class Palette3DCreator : MonoBehaviour
         
         return output;
     }
+
     void Update()
     {
         if(PaletteFromGradient)
@@ -181,6 +211,13 @@ public class Palette3DCreator : MonoBehaviour
 
             AssetDatabase.CreateAsset(ColMap, string.Format("Assets/PixCelToolkit/Posterize and Dither/Lut Based/LUTs/" + (ColorDepthPerChannel*3).ToString() + "-Bit-3DLUT-{0:yyyy-MM-dd_hh-mm-ss-tt}.asset",System.DateTime.Now));
             CreateFromPalette = false;
+        }
+        else if(CreateFromRemapRGB)
+        {
+            Texture3D ColMap = Create3DColorMap(GradientRemapColors(CreateBaseColorArray(ColorDepthPerChannel), RRemap, GRemap, BRemap));
+
+            AssetDatabase.CreateAsset(ColMap, string.Format("Assets/PixCelToolkit/Posterize and Dither/Lut Based/LUTs/" + (ColorDepthPerChannel*3).ToString() + "-Bit-3DLUT-{0:yyyy-MM-dd_hh-mm-ss-tt}.asset",System.DateTime.Now));
+            CreateFromRemapRGB = false;
         }
     }
 }
